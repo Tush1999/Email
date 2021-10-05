@@ -1,20 +1,19 @@
 import React, { Component } from "react";
+import data from "../../Content";
 
 export default class Email extends Component {
-    render(){
-        return(
-            <>
-            <div className="content">
-            <div>{this.props.Saluation} {this.props.ReceiverName},</div>
-            <div className="inner-content">
-            {this.props.emailContent}
-            </div>
-            <div className="end-content">
-            <div>{this.props.Named},</div>
-            <div>{this.props.SenderName}</div>
-            </div>
-            </div>
-            </>
-        )
-    }
+  render() {
+    let datas = this.props.ReceiverName
+      ? data.replace("Sir", this.props.ReceiverName)
+      : data;
+    datas = this.props.SenderName
+      ? datas.replace("Anonymous", this.props.SenderName)
+      : datas;
+    let text = datas.split("\n").map((i) => <p>{i}</p>);
+    return (
+      <>
+        <div>{text}</div>
+      </>
+    );
+  }
 }
